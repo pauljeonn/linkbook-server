@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const postRoute = require('./routes/posts');
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ mongoose
 
 // Middleware
 app.use(express.json()); // request body parsing 용도
+
+// Routes
+app.use('api/posts', postRoute);
 
 app.listen(4000, () => {
 	console.log('Backend server is running.');

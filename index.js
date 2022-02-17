@@ -15,7 +15,7 @@ mongoose
 app.use(express.json()); // request body parsing 용도
 
 // Routes
-app.use('api/posts', postRoute);
+app.use('/api/posts', postRoute);
 
 app.listen(4000, () => {
 	console.log('Backend server is running.');

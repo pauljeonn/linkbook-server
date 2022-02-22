@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
@@ -14,6 +15,7 @@ mongoose
 	.catch((err) => console.log(err));
 
 // Middleware
+app.use(cors());
 app.use(express.json()); // request body parsing 용도
 
 // Routes

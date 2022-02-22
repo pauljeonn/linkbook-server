@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const { restart } = require('nodemon');
 
 // REGISTER
 router.post('/register', async (req, res) => {
@@ -15,6 +14,8 @@ router.post('/register', async (req, res) => {
 			email: req.body.email,
 			password: hashedPassword,
 		});
+
+		console.log(newUser);
 
 		const user = await newUser.save();
 		res.status(200).json(user);
@@ -36,6 +37,9 @@ router.post('/login', async (req, res) => {
 			user.password
 		);
 		!validPassword && res.status(400).send('잘못된 비밀번호입니다.');
+
+		// 비밀번호 숨기기
+		user.password = undefined;
 
 		res.status(200).json(user);
 	} catch (err) {

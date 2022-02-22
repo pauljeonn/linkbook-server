@@ -46,6 +46,16 @@ router.get('/timeline/:id', async (req, res) => {
 	}
 });
 
+// GET PROFILE POSTS
+router.get('/profile/:id', async (req, res) => {
+	try {
+		const posts = await Post.find({ userId: req.params.id });
+		res.status(200).json(posts);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
 // DELETE POST
 router.delete('/:id', async (req, res) => {
 	try {

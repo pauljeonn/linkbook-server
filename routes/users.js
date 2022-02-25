@@ -29,8 +29,6 @@ router.get('/friends/:id', async (req, res) => {
 
 // GET RECOMMENDED FRIENDS
 router.get('/recommended', async (req, res) => {
-	console.log('GET RECOMMENDED');
-
 	try {
 		const all = await User.find({}).exec();
 

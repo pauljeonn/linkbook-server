@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // REGISTER
 router.post('/register', async (req, res) => {
@@ -38,8 +39,18 @@ router.post('/login', async (req, res) => {
 		);
 		!validPassword && res.status(400).send('잘못된 비밀번호입니다.');
 
-		// 비밀번호 숨기기
+		// 비밀번호 제거
 		user.password = undefined;
+
+		if (user) {
+			// JWT access token 생성
+			const accessToken = jwt.sign(
+				{ id: user.id, isAdmin: user.isAdmin },
+				process.env.JWT_SECRET_KEY,
+				{ expiresIn: 3600 } // 1시간 후 만기
+			);
+			console.log(accessToken);
+		}
 
 		res.status(200).json(user);
 	} catch (err) {

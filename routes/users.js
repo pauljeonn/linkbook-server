@@ -11,6 +11,17 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
+// GET ALL USERS
+router.get('/all/:id', async (req, res) => {
+	try {
+		// 본인을 제외한 모든 유저 가져오기
+		const users = await User.find({ _id: { $ne: req.params.id } });
+		res.status(200).json(users);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
 // GET FRIENDS
 router.get('/friends/:id', async (req, res) => {
 	try {

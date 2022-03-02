@@ -25,6 +25,13 @@ app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/files', fileRoute);
 
-app.listen(4000, () => {
+// 클라이언트 빌드 폴더를 static으로 사용
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.listen(process.env.PORT || 4000, () => {
 	console.log('Backend server is running.');
 });

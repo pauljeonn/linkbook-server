@@ -19,7 +19,7 @@ const upload = multer({
 			cb(null, Date.now() + file.originalname);
 		},
 	}),
-	limits: { fileSize: 10 * 1024 * 1024 }, // 파일 용량 제한
+	limits: { fileSize: 1024 * 1024 }, // 파일 용량 제한 (1MB)
 });
 
 // UPLOAD FILE

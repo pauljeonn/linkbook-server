@@ -49,7 +49,6 @@ router.post('/login', async (req, res) => {
 				process.env.JWT_SECRET_KEY,
 				{ expiresIn: 3600 } // 1시간 후 만기
 			);
-			console.log(accessToken);
 		}
 
 		res.status(200).json(user);
